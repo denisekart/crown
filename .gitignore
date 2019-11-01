@@ -135,6 +135,7 @@ _TeamCity*
 # Visual Studio code coverage results
 *.coverage
 *.coveragexml
+coverage/
 
 # NCrunch
 _NCrunch_*
@@ -328,3 +329,9 @@ ASALocalRun/
 
 # MFractors (Xamarin productivity tool) working folder 
 .mfractor/
+
+# Build related
+tools/**
+build/tools/**
+!tools/packages.config
+!build/tools/packages.config

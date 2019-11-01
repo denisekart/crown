@@ -1,0 +1,46 @@
+{
+  "activeProfile":"default",
+  "diagnostics": [
+    {
+      "id": "CROWN_001",
+      "category": "Documentation",
+      "title": "The class should have a summary.",
+      "messageFormat": "The class should have a summary.",
+      "severity": "Warning",
+      "codeFix": {
+        "title": "Add summary to this class.",
+        "messageFormat": "The {1}."
+      }
+    },
+    {
+      "id": "CROWN_002",
+      "category": "Documentation",
+      "title": "The class may have a summary.",
+      "messageFormat": "The class may have a summary.",
+      "severity": "Info",
+      "codeFix": {
+        "diagnosticIdReference": "CROWN_001"
+      }
+    },
+    {
+      "id": "CROWN_003",
+      "category": "Documentation",
+      "title": "The constructor should have a summary.",
+      "messageFormat": "",
+      "severity": "Warning",
+      "codeFix": {
+        "title": "Add summary to this constructor.",
+        "messageFormat": "Initializes a new instance of {1}."
+      }
+    }
+  ],
+  "profiles": {
+    "default": {
+      "enabledDiagnostics": [],
+      "disabledDiagnostics": []
+    }
+  },
+  "messageFormats": {
+    "parameter":  "The {0}." 
+  } 
+}
