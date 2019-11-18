@@ -1,16 +1,27 @@
 ﻿using Newtonsoft.Json;
 using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Security;
 using Newtonsoft.Json.Serialization;
 
 namespace Crown.Configuration
 {
     public class ConfigurationReader
     {
+        public ConfigurationReader()
+        {
+            
+        }
+
+        public ConfigurationReader(string solutionRoot)
+        {
+            _configurationLayers.Insert(0,()=>GetConfigurationFromPath(Path.Combine(solutionRoot,".crown")));            
+        }
         private CrownConfiguration _configuration;
 
         public CrownConfiguration Configuration =>
@@ -25,6 +36,26 @@ namespace Crown.Configuration
                     return layerInstance;
             }
             throw new ArgumentOutOfRangeException(nameof(_configurationLayers));
+        }
+
+        private static readonly ConcurrentDictionary<string, ConfigurationReader> _instances=new ConcurrentDictionary<string, ConfigurationReader>();
+
+        public static ConfigurationReader InstanceFor(string solutionRoot)
+        {
+            if (string.IsNullOrWhiteSpace(solutionRoot))
+            {
+                return Instance;
+            }
+
+            if (_instances.ContainsKey(solutionRoot))
+            {
+                if (_instances.TryGetValue(solutionRoot, out var value))
+                    return value;
+            }
+            var newInstance = new ConfigurationReader(solutionRoot);
+            _instances.TryAdd(solutionRoot, newInstance);
+
+            return newInstance;
         }
 
         private static readonly Lazy<ConfigurationReader> _instance = new Lazy<ConfigurationReader>(()=>new ConfigurationReader(),System.Threading.LazyThreadSafetyMode.ExecutionAndPublication);

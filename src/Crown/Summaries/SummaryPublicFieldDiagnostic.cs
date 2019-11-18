@@ -7,14 +7,14 @@ using Microsoft.CodeAnalysis.Diagnostics;
 namespace Crown.Summaries
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    public class SummaryPublicClassDiagnostic : SummaryDiagnosticBase<ClassDeclarationSyntax>
+    public class SummaryPublicFieldDiagnostic : SummaryDiagnosticBase<ClassDeclarationSyntax>
     {
-        public override string DiagnosticId => "CROWN_001";
-        public override SyntaxKind SyntaxKind => SyntaxKind.ClassDeclaration;
+        public override string DiagnosticId => "CROWN_004";
+        public override SyntaxKind SyntaxKind => SyntaxKind.FieldDeclaration;
+
         protected override bool ShouldCreateDiagnostic(SyntaxNodeAnalysisContext context)
         {
-            return base.ShouldCreateDiagnostic(context) &&
-                   (context.Node as ClassDeclarationSyntax).Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword));
+            return base.ShouldCreateDiagnostic(context) && (context.Node as ClassDeclarationSyntax).Modifiers.Any(x => x.IsKind(SyntaxKind.PublicKeyword)); ;
         }
 
         public override Location GetLocation(ClassDeclarationSyntax node, SyntaxNodeAnalysisContext context)

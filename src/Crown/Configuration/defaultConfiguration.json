@@ -26,11 +26,74 @@
       "id": "CROWN_003",
       "category": "Documentation",
       "title": "The constructor should have a summary.",
-      "messageFormat": "",
+      "messageFormat": "The constructor should have a summary.",
       "severity": "Warning",
       "codeFix": {
         "title": "Add summary to this constructor.",
         "messageFormat": "Initializes a new instance of {1}."
+      }
+    },
+    {
+      "id": "CROWN_004",
+      "category": "Documentation",
+      "title": "The field should have a summary.",
+      "messageFormat": "The field should have a summary.",
+      "severity": "Warning",
+      "codeFix": {
+        "title": "Add summary to this field.",
+        "messageFormat": "The {1}."
+      }
+    },
+    {
+      "id": "CROWN_005",
+      "category": "Documentation",
+      "title": "The field may have a summary.",
+      "messageFormat": "The field may have a summary.",
+      "severity": "Info",
+      "codeFix": {
+        "diagnosticIdReference": "CROWN_004"
+      }
+    },
+    {
+      "id": "CROWN_006",
+      "category": "Documentation",
+      "title": "The method should have a summary.",
+      "messageFormat": "The method should have a summary.",
+      "severity": "Warning",
+      "codeFix": {
+        "title": "Add summary to this method.",
+        "messageFormat": "The {1}."
+      }
+    },
+    {
+      "id": "CROWN_007",
+      "category": "Documentation",
+      "title": "The method may have a summary.",
+      "messageFormat": "The method may have a summary.",
+      "severity": "Info",
+      "codeFix": {
+        "diagnosticIdReference": "CROWN_006"
+      }
+    },
+    {
+      "id": "CROWN_008",
+      "category": "Documentation",
+      "title": "The property should have a summary.",
+      "messageFormat": "The property should have a summary.",
+      "severity": "Warning",
+      "codeFix": {
+        "title": "Add summary to this property.",
+        "messageFormat": "The {1}."
+      }
+    },
+    {
+      "id": "CROWN_009",
+      "category": "Documentation",
+      "title": "The property may have a summary.",
+      "messageFormat": "The property may have a summary.",
+      "severity": "Info",
+      "codeFix": {
+        "diagnosticIdReference": "CROWN_008"
       }
     }
   ],

@@ -14,9 +14,10 @@ namespace Crown
     {
         private CrownDiagnostic _diagnosticDescription;
         public abstract string DiagnosticId { get; }
+        private string solutionRoot = null;
         public abstract SyntaxKind SyntaxKind { get; }
         public CrownDiagnostic Description => _diagnosticDescription ?? (_diagnosticDescription =
-                                                  ConfigurationReader.Instance.Configuration.Diagnostics
+                                                  ConfigurationReader.InstanceFor(solutionRoot).Configuration.Diagnostics
                                                       .SingleOrDefault(x => x.Id.Equals(DiagnosticId)));
         public override void Initialize(AnalysisContext context)
         {
@@ -28,10 +29,12 @@ namespace Crown
 
         protected void AnalyzeNode(SyntaxNodeAnalysisContext context)
         {
+            solutionRoot = solutionRoot ?? context.GetSolution()?.FilePath;
+
             if(Description == null)
                 return;
 
-            if(!ConfigurationReader.Instance.Configuration.CurrentProfile().IsDiagnosticEnabled(DiagnosticId))
+            if(!ConfigurationReader.InstanceFor(solutionRoot).Configuration.CurrentProfile().IsDiagnosticEnabled(DiagnosticId))
                 return;
             
             if (ShouldCreateDiagnostic(context))

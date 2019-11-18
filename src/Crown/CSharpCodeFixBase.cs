@@ -14,8 +14,9 @@ namespace Crown
     {
         private CrownCodeFix _diagnosticDescription;
         public abstract string DiagnosticId { get; }
+        private string solutionRoot = null;
         public CrownCodeFix Description => _diagnosticDescription ?? (_diagnosticDescription =
-                                               ConfigurationReader.Instance.Configuration.Diagnostics
+                                               ConfigurationReader.InstanceFor(solutionRoot).Configuration.Diagnostics
                                                    .SingleOrDefault(x => x.Id.Equals(DiagnosticId))
                                                    ?.CodeFix);
         public sealed override FixAllProvider GetFixAllProvider()
@@ -25,6 +26,8 @@ namespace Crown
 
         public sealed override async Task RegisterCodeFixesAsync(CodeFixContext context)
         {
+            solutionRoot = solutionRoot??context.Document.Project.Solution.FilePath;
+
             if(Description == null)
                 return;
 
