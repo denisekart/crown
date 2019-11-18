@@ -95,6 +95,16 @@
       "codeFix": {
         "diagnosticIdReference": "CROWN_008"
       }
+    },
+    {
+      "id": "CROWN_010",
+      "category": "Structure",
+      "title": "Multiple empty lines.",
+      "messageFormat": "Should not define multiple empty lines.",
+      "severity": "Warning",
+      "codeFix": {
+        "title": "Remove redundant blank lines."
+      }
     }
   ],
   "profiles": {
